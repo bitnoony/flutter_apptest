@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "647371217539",
+    "firebase_url": "https://football-222314.firebaseio.com",
+    "project_id": "football-222314",
+    "storage_bucket": "football-222314.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647371217539:android:ecf0e75d4fb037a935d9b6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_apptest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647371217539-3baiemfv0uideu29cut5bonabrqghn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_oOd3ECrj6V-fm3cudFScVwank51zTo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647371217539-3baiemfv0uideu29cut5bonabrqghn82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
