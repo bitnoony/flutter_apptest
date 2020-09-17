@@ -2,10 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/addpage.dart';
 import 'package:flutter_apptest/viewpage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp()); }
 
-void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -17,14 +21,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
+
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+/*  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;*/
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -32,29 +38,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  var _todoController = TextEditingController();
+ //  var _todoController = TextEditingController();
   var data;
 
-/*  void initState() {
+
+  void initState() {
     // TODO: implement initState
     super.initState();
     loadData();
-  }*/
+  }
 
-/*  @override
+  @override
   void dispose() {
-    _todoController.dispose();
-  }*/
+    super.dispose();
+ //   _todoController.dispose();
+  }
 
-  /* void _incrementCounter() {
+   void _incrementCounter() {
    Firestore.instance.collection("test").doc("RA0Txb9hziuhWSp5dV4H").update({"title": "to"});
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("게시판 글목록"),
         actions: [
           MaterialButton(
             child: Icon(Icons.add),
