@@ -1,7 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ViewPage extends StatelessWidget {
 
+
+  var title ='';
+  var content= '';
+  DocumentReference ref;
+
+  ViewPage(this.title, this.content, this.ref);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,7 @@ class ViewPage extends StatelessWidget {
           children: [
             TextField(
               decoration: InputDecoration(
-                hintText: "제목",
+                hintText: title,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.0)
               ),
             ),
@@ -26,7 +33,7 @@ class ViewPage extends StatelessWidget {
               maxLines: 6,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "글 내용"
+                hintText: content,
               ),
             ),
             SizedBox(
@@ -40,7 +47,7 @@ class ViewPage extends StatelessWidget {
                   child: Text("수정"),
                   color: Colors.blue,
                   onPressed: (){
-
+                    ref.update({});
                   },
                   textColor: Colors.white,
                 ),
@@ -51,7 +58,7 @@ class ViewPage extends StatelessWidget {
                   child: Text("삭제"),
                   color: Colors.redAccent,
                   onPressed: (){
-
+                    ref.delete();
                   },
                   textColor: Colors.white,
                 ),

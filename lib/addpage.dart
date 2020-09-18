@@ -27,7 +27,7 @@ class _AddPageState extends State<AddPage> {
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(hintText: '입력해 주세요'),
                 onChanged: (String str) {
-                  setState(() => title = str);
+                  title = str;
                 },
               ),
               SizedBox(
@@ -40,7 +40,7 @@ class _AddPageState extends State<AddPage> {
                   labelText: '내용을 입력하세요.',
                 ),
                 onChanged: (String str2) {
-                  setState(() => content = str2);
+                  content = str2;
                 },
               ),
               SizedBox(
@@ -74,7 +74,8 @@ class _AddPageState extends State<AddPage> {
                             FlatButton(
                               child: Text('OK'),
                               onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
+                                Navigator.popUntil(context, (route)=> route.settings.name == "/start");
+                                // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
                               },
                             ),
 
