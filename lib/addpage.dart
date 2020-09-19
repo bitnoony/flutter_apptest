@@ -12,6 +12,7 @@ class _AddPageState extends State<AddPage> {
   String title = '';
   String content = '';
   var docName = DateTime.now();
+  PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class _AddPageState extends State<AddPage> {
           child: Column(
             children: [
               TextField(
-                style: TextStyle(fontSize: 32, color: Colors.red),
+                style: TextStyle(fontSize: 20, color: Colors.black),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(hintText: '입력해 주세요'),
                 onChanged: (String str) {
@@ -56,33 +57,12 @@ class _AddPageState extends State<AddPage> {
                       .doc("$docName")
                       .setData({"title": title, "content" : content});
                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
-                  showDialog(context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context)
-                      {
-                        return AlertDialog(
-                          title: Text('글 작성 완료'),
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: [
-                                Text('글이 저장되었습니다.'),
-                                Text('메인화면으로 이동합니다.'),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            FlatButton(
-                              child: Text('OK'),
-                              onPressed: (){
-                                Navigator.popUntil(context, (route)=> route.settings.name == "/start");
-                                // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
-                              },
-                            ),
-
-                          ],
-                        );
-                      });
-                },
+                  setState(() {
+                    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                    //Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
+                    //_pageController.animateToPage(0, duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
+                  });
+                },   //Navigator.popUntil(context, (route)=> route.settings.name == "/start");
               )
             ],
           ),

@@ -12,7 +12,7 @@ Future<void> main() async {
 
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,18 +21,18 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: {
-        "/start": (BuildContext c) => MyHomePage()
-      },
-      initialRoute: "/start",
-    );
+      routes: {   //route별 명칭 지정후 사용하는 방법
+          '/' : (BuildContext context) => MyHomePage(),
+          '/add' : (BuildContext context) => AddPage(),
+
+        },
+      initialRoute: '/',
+     );
   }
 }
 
 
 class MyHomePage extends StatefulWidget {
-/*  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;*/
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,107 +40,126 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  //  var _todoController = TextEditingController();
-  // var data;
   QuerySnapshot data;
+  int _selectedIndex = 0;
+  PageController _pageController = PageController();
 
-
-/*
- Future<QuerySnapshot> getDocuments({
-  platform.Source source = platform.Source.serverAndCache,
- }) async {
-   assert(source != null);
-   final docs = await _delegate.getDocuments(source: source);
-   return QuerySnapshot._(docs, firestore);
- }
-
- List<DocumentSnapshot> get documents => _delegate.documents.map((item) => DocumentSnapshot._(item, _firestore)).toList();
-*/
-
-//Future<DocumentSnapshot> titleList = Firestore.instance.collection('board').document().get();
+  void _onTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _pageController.animateToPage(_selectedIndex, duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
+    });
+  }
 
 
   void initState() {
     // TODO: implement initState
     super.initState();
+
+
   }
 
   @override
   void dispose() {
+    _pageController.dispose();
     super.dispose();
+
     //   _todoController.dispose();
   }
-
-/*   void _incrementCounter() {
-   Firestore.instance.collection("test").doc("RA0Txb9hziuhWSp5dV4H").update({"title": "to"});
-  }*/
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    loadData();
+  //   loadData();
   }
 
   @override
   Widget build(BuildContext context) {
+    loadData();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("게시판 글목록"),
-          actions: [
-            MaterialButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext c) => AddPage()));
-              },
+
+        body: PageView(
+          controller: _pageController,
+          children: [
+            Container(
+              color: Colors.cyanAccent,
+              child: MainPage(),
+            ),
+            Container(
+              color: Colors.amberAccent,
+              child: AddPage(),
+            ),
+            Container(
+              color: Colors.greenAccent,
+
             ),
           ],
+          onPageChanged: (index){
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
         ),
-        // ignore: missing_return
-        body: FutureBuilder<QuerySnapshot>(
-          future: FirebaseFirestore.instance.collection("board").get(),
-            builder: (context, snapshot){
-          if(snapshot.hasData){
-            return ListView(
-              children: snapshot.data.docs.map((e) => ListTile(
-                onTap: (){
-                  Navigator.push( context,
-                      MaterialPageRoute(
-                          builder:
-                              (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference)
-                      )
-                  );
-                },
-                title: Text(e.data()["title"] ?? ""),
-                // subtitle: Text(e.data()["content"] ?? ""
-                // ),
-              )).toList(),
-            );
-          }else{
-            return Center(child: CircularProgressIndicator(),);
-          }
-        })
+
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: _onTap,
+        currentIndex: _selectedIndex,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('home')),
+          BottomNavigationBarItem(icon: Icon(Icons.create),title: Text('wirte')),
+          BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('setting')),
+
+        ],
+      ),
+
     );
   }
 
   Future<void> loadData() async {
     data = await FirebaseFirestore.instance.collection("board").get();
     setState(() {});
-
-    print("_________");
-
-/*  FirebaseFirestore.instance.collection("board").get().then((value){
-    print(value);
-  });
-  print("sss");*/
-
-    //Future<DocumentSnapshot> titleList = Firestore.instance.collection('board').document().get();
-
   }
-
 }
 
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
 
+class _MainPageState extends State<MainPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("게시판 글목록"),
 
+      ),
+      body: FutureBuilder<QuerySnapshot>(
+          future: FirebaseFirestore.instance.collection("board").get(),
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return ListView(
+                children: snapshot.data.docs.map((e) => ListTile(
+                  leading: Icon(Icons.library_books),
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(     // documentData.data["title"]
+                            builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference)
+                        )
+                    );
+                  },
+                  title: Text(e.data()["title"] ?? ""), //subtitle: Text(e.data()["content"] ?? ""),
+                  trailing: Icon(Icons.arrow_forward),
+                )).toList(),
+              );
+            }else{
+              return Center(child: CircularProgressIndicator(),);
+            }
+          }),
+    );
+
+  }
+}
 

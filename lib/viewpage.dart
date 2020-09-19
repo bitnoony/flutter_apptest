@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'main.dart';
+
 class ViewPage extends StatelessWidget {
 
 
@@ -25,6 +27,9 @@ class ViewPage extends StatelessWidget {
                 hintText: title,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.0)
               ),
+              onChanged: (String str1) {
+                title = str1;
+              },
             ),
             SizedBox(
               height: 20,
@@ -35,6 +40,9 @@ class ViewPage extends StatelessWidget {
                 border: OutlineInputBorder(),
                 hintText: content,
               ),
+              onChanged: (String str2) {
+                content = str2;
+              },
             ),
             SizedBox(
               height: 10,
@@ -47,7 +55,8 @@ class ViewPage extends StatelessWidget {
                   child: Text("수정"),
                   color: Colors.blue,
                   onPressed: (){
-                    ref.update({});
+                    ref.update({'title' : title, 'content' : content});
+                    Navigator.pop(context);
                   },
                   textColor: Colors.white,
                 ),
@@ -59,6 +68,7 @@ class ViewPage extends StatelessWidget {
                   color: Colors.redAccent,
                   onPressed: (){
                     ref.delete();
+                    Navigator.pop(context);
                   },
                   textColor: Colors.white,
                 ),
