@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 import 'main.dart';
 
@@ -8,9 +9,17 @@ class ViewPage extends StatelessWidget {
 
   var title ='';
   var content= '';
+  var name ='';
+  var date= '';
+  Timestamp timeUpdate;
+  //Timestamp time = Timestamp.now();
   DocumentReference ref;
+  //String dateUpdate = Jiffy().format("M월d일");
+  Timestamp timeUpdateNew = Timestamp.now();
 
-  ViewPage(this.title, this.content, this.ref);
+
+
+  ViewPage(this.title, this.content, this.ref, this.date, this.name, this.timeUpdate);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +31,14 @@ class ViewPage extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
+                filled: true,
                 hintText: title,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20.0)
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
               ),
               onChanged: (String str1) {
                 title = str1;
@@ -34,16 +47,24 @@ class ViewPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            TextField(
+            TextFormField(
               maxLines: 6,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                filled: true,
                 hintText: content,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
               ),
               onChanged: (String str2) {
                 content = str2;
               },
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Text("마지막 수정 : $timeUpdate"),
             SizedBox(
               height: 10,
             ),
@@ -55,7 +76,7 @@ class ViewPage extends StatelessWidget {
                   child: Text("수정"),
                   color: Colors.blue,
                   onPressed: (){
-                    ref.update({'title' : title, 'content' : content});
+                    ref.update({'title' : title, 'content' : content, 'timeUpdate' : timeUpdateNew});
                     Navigator.pop(context);
                   },
                   textColor: Colors.white,

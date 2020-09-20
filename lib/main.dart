@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/addpage.dart';
+import 'package:flutter_apptest/profile.dart';
 import 'package:flutter_apptest/viewpage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:jiffy/jiffy.dart';
+import 'dart:ui';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +23,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: {   //route별 명칭 지정후 사용하는 방법
+      routes: {
           '/' : (BuildContext context) => MyHomePage(),
           '/add' : (BuildContext context) => AddPage(),
 
@@ -31,7 +36,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
 
   @override
@@ -39,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //var now = Jiffy().format("yyyy년 MM월 dd일");
 
   QuerySnapshot data;
   int _selectedIndex = 0;
@@ -51,11 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   void initState() {
     // TODO: implement initState
     super.initState();
-
 
   }
 
@@ -64,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _pageController.dispose();
     super.dispose();
 
-    //   _todoController.dispose();
   }
 
   @override
@@ -92,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               color: Colors.greenAccent,
-
+              child: Profile(),
             ),
           ],
           onPageChanged: (index){
@@ -104,12 +106,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        selectedItemColor: Colors.amberAccent,
+        unselectedItemColor: Colors.white,
         onTap: _onTap,
         currentIndex: _selectedIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('home')),
-          BottomNavigationBarItem(icon: Icon(Icons.create),title: Text('wirte')),
-          BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('setting')),
+          BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('글목록')),
+          BottomNavigationBarItem(icon: Icon(Icons.create ),title: Text('글쓰기')),
+          BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('프로필', )),
 
         ],
       ),
@@ -132,26 +137,31 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("게시판 글목록"),
 
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text("게시판 글 목록"),
+        centerTitle: true,
       ),
       body: FutureBuilder<QuerySnapshot>(
-          future: FirebaseFirestore.instance.collection("board").get(),
+          future: FirebaseFirestore.instance.collection("board").orderBy('time', descending: true).get(),
           builder: (context, snapshot){
             if(snapshot.hasData){
               return ListView(
-                children: snapshot.data.docs.map((e) => ListTile(
-                  leading: Icon(Icons.library_books),
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(     // documentData.data["title"]
-                            builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference)
-                        )
-                    );
-                  },
-                  title: Text(e.data()["title"] ?? ""), //subtitle: Text(e.data()["content"] ?? ""),
-                  trailing: Icon(Icons.arrow_forward),
+                children: snapshot.data.docs.map((e) => Card(
+                  child: ListTile(
+                    onTap: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(     // documentData.data["title"]
+                              builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference,e.data()["name"],e.data()["date"],e.data()["timeUpdate"])
+                          )
+                      );
+                    },
+                    leading: Text(e.data()["date"]),
+                    title: Text(e.data()["title"] ?? ""), //subtitle: Text(e.data()["content"] ?? ""),
+                    trailing: Text(e.data()["name"]),//Icon(Icons.arrow_forward),
+                    dense: true,
+                  ),
                 )).toList(),
               );
             }else{

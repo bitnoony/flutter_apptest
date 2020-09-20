@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/main.dart';
+import 'package:jiffy/jiffy.dart';
 
 class AddPage extends StatefulWidget {
 
@@ -11,22 +12,34 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   String title = '';
   String content = '';
+  String name ='송빛누니';
+  var timeUpdate ='';
   var docName = DateTime.now();
+  String date = Jiffy().format("M월d일");
   PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("새글 쓰기")),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(title: Text("새 글 쓰기"), centerTitle: true,),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                cursorColor: Colors.black,
                 style: TextStyle(fontSize: 20, color: Colors.black),
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(hintText: '입력해 주세요'),
+
                 onChanged: (String str) {
                   title = str;
                 },
@@ -34,12 +47,18 @@ class _AddPageState extends State<AddPage> {
               SizedBox(
                 height: 10,
               ),
-              TextField(
-                maxLines: 4,
+              TextFormField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '내용을 입력하세요.',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
                 ),
+                cursorColor: Colors.black,
+                maxLines: 4,
+                style: TextStyle(color: Colors.black),
+
                 onChanged: (String str2) {
                   content = str2;
                 },
@@ -55,7 +74,7 @@ class _AddPageState extends State<AddPage> {
                   Firestore.instance
                       .collection("board")
                       .doc("$docName")
-                      .setData({"title": title, "content" : content});
+                      .setData({"title": title, "content" : content, "name" : name, "date" : date, "time" : docName, "timeUpdate" : timeUpdate});
                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
                   setState(() {
                     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
