@@ -12,12 +12,8 @@ class ViewPage extends StatelessWidget {
   var name ='';
   var date= '';
   Timestamp timeUpdate;
-  //Timestamp time = Timestamp.now();
   DocumentReference ref;
-  //String dateUpdate = Jiffy().format("M월d일");
   Timestamp timeUpdateNew = Timestamp.now();
-
-
 
   ViewPage(this.title, this.content, this.ref, this.date, this.name, this.timeUpdate);
 
