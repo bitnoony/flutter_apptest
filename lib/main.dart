@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/addpage.dart';
+import 'package:flutter_apptest/boardPage.dart';
 import 'package:flutter_apptest/profile.dart';
 import 'package:flutter_apptest/viewpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -89,8 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: MainPage(),
             ),
             Container(
-              color: Colors.amberAccent,
+              color: Colors.cyanAccent,
               child: AddPage(),
+            ),
+            Container(
+              color: Colors.amberAccent,
+              child: BoardPage(),
             ),
             Container(
               color: Colors.greenAccent,
@@ -113,7 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('글목록')),
-          BottomNavigationBarItem(icon: Icon(Icons.create ),title: Text('글쓰기')),
+          BottomNavigationBarItem(icon: Icon(Icons.create),title: Text('글쓰기')),
+          BottomNavigationBarItem(icon: Icon(Icons.create_new_folder ),title: Text('게시판')),
           BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('프로필', )),
 
         ],
@@ -159,7 +165,7 @@ class _MainPageState extends State<MainPage> {
                     },
                     leading: Text(e.data()["date"]),
                     title: Text(e.data()["title"] ?? ""), //subtitle: Text(e.data()["content"] ?? ""),
-                    trailing: Text(e.data()["name"]),//Icon(Icons.arrow_forward),
+                    trailing: Text(e.data()["name"]), //Icon(Icons.arrow_forward),
                     dense: true,
                   ),
                 )).toList(),

@@ -10,24 +10,21 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
  QuerySnapshot data;
 
-/*
   Future<void> loadData() async {
     data = await FirebaseFirestore.instance.collection("board").where('name', isEqualTo: '송빛누니').get();
     setState(() {});
   }
-*/
 
   @override
   Widget build(BuildContext context) {
-   // loadData();
+    loadData();
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("사용자 정보"),
         centerTitle: true,
       ),
-      body:
-              UserAccountsDrawerHeader(
+      body:  UserAccountsDrawerHeader(
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage('assets/noony_profile.png'),
                   backgroundColor: Colors.white,
@@ -37,6 +34,7 @@ class _ProfileState extends State<Profile> {
                 onDetailsPressed: () {
                   print('setting clicked');
                 },
+
                 arrowColor: Colors.red,
                 decoration: BoxDecoration(
                   color: Colors.amber,
@@ -50,38 +48,18 @@ class _ProfileState extends State<Profile> {
                     spreadRadius: 4.0,
                   )],
                 ),
+
               ),
 
-/*          FutureBuilder<QuerySnapshot>(
-              future: FirebaseFirestore.instance.collection("board").orderBy('time', descending: true).get(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  return ListView(
-                    children: snapshot.data.docs.map((e) => Card(
-                      child: ListTile(
-                        onTap: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(     // documentData.data["title"]
-                                  builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference,e.data()["name"],e.data()["date"],e.data()["timeUpdate"])
-                              )
-                          );
-                        },
-                        leading: Text(e.data()["date"]),
-                        title: Text(e.data()["title"] ?? ""), //subtitle: Text(e.data()["content"] ?? ""),
-                        trailing: Text(e.data()["name"]),//Icon(Icons.arrow_forward),
-                        dense: true,
-                      ),
-                    )).toList(),
-                  );
-                }else{
-                  return Center(child: CircularProgressIndicator(),);
-                }
-              }),*/
+
+
+
 
     );
-
-
-
-
   }
+
+
+
 }
+
+
