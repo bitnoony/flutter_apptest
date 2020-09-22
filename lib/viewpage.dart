@@ -1,18 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
-
-import 'main.dart';
+import 'package:flutter_apptest/main.dart';
 
 class ViewPage extends StatelessWidget {
-
 
   var title ='';
   var content= '';
   var name ='';
   var date= '';
-
   DocumentReference ref;
+
   ViewPage(this.title, this.content, this.ref, this.date, this.name);
 
   @override

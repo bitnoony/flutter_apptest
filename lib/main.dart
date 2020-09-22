@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //var now = Jiffy().format("yyyy년 MM월 dd일");
 
- // QuerySnapshot data;
+  QuerySnapshot data;
   int _selectedIndex = 0;
   PageController _pageController = PageController();
 
@@ -73,12 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-  //   loadData();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    //loadData();
+    loadData();
     return Scaffold(
 
         body: PageView(
@@ -122,10 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-/*  Future<void> loadData() async {
+  Future<void> loadData() async {
     data = await FirebaseFirestore.instance.collection("board").get();
     setState(() {});
-  }*/
+  }
 }
 
 class MainPage extends StatefulWidget {
