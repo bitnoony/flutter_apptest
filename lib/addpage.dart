@@ -13,7 +13,6 @@ class _AddPageState extends State<AddPage> {
   String title = '';
   String content = '';
   String name ='송빛누니';
-  var timeUpdate ='';
   var docName = DateTime.now();
   String date = Jiffy().format("M월d일");
   PageController _pageController = PageController();
@@ -74,7 +73,7 @@ class _AddPageState extends State<AddPage> {
                   Firestore.instance
                       .collection("board")
                       .doc("$docName")
-                      .setData({"title": title, "content" : content, "name" : name, "date" : date, "time" : docName, "timeUpdate" : timeUpdate});
+                      .setData({"title": title, "content" : content, "name" : name, "date" : date, "time" : docName});
                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
                   setState(() {
                     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);

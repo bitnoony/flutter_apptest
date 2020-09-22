@@ -153,7 +153,7 @@ class _MainPageState extends State<MainPage> {
                     onTap: (){
                       Navigator.push(context,
                           MaterialPageRoute(     // documentData.data["title"]
-                              builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference,e.data()["name"],e.data()["date"],e.data()["timeUpdate"])
+                              builder: (context)=> ViewPage(e.data()["title"],e.data()["content"],e.reference,e.data()["name"],e.data()["date"])
                           )
                       );
                     },

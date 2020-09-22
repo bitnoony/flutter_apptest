@@ -11,11 +11,9 @@ class ViewPage extends StatelessWidget {
   var content= '';
   var name ='';
   var date= '';
-  Timestamp timeUpdate;
-  DocumentReference ref;
-  Timestamp timeUpdateNew = Timestamp.now();
 
-  ViewPage(this.title, this.content, this.ref, this.date, this.name, this.timeUpdate);
+  DocumentReference ref;
+  ViewPage(this.title, this.content, this.ref, this.date, this.name);
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +55,7 @@ class ViewPage extends StatelessWidget {
                 content = str2;
               },
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text("마지막 수정 : $timeUpdate"),
+
             SizedBox(
               height: 10,
             ),
@@ -72,7 +67,7 @@ class ViewPage extends StatelessWidget {
                   child: Text("수정"),
                   color: Colors.blue,
                   onPressed: (){
-                    ref.update({'title' : title, 'content' : content, 'timeUpdate' : timeUpdateNew});
+                    ref.update({'title' : title, 'content' : content});
                     Navigator.pop(context);
                   },
                   textColor: Colors.white,
