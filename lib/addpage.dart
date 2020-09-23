@@ -21,7 +21,17 @@ class _AddPageState extends State<AddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(title: Text("새 글 쓰기"), centerTitle: true,),
+      appBar: AppBar(
+        leading: Transform.scale(
+            scale: 1.5,
+            child: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.amber),
+                onPressed: () {
+                  Navigator.pop(context);
+                }
+            )
+        ),
+        title: Text("새 글 쓰기"), centerTitle: true,),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -76,7 +86,7 @@ class _AddPageState extends State<AddPage> {
                       .setData({"title": title, "content" : content, "name" : name, "date" : date, "time" : docName});
                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
                   setState(() {
-                    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                    Navigator.pop(context);
                     //Navigator.push(context, MaterialPageRoute(builder: (BuildContext c)=>MyHomePage()));
                     //_pageController.animateToPage(0, duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
                   });

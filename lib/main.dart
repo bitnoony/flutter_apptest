@@ -3,11 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/addpage.dart';
 import 'package:flutter_apptest/boardPage.dart';
-import 'package:flutter_apptest/parofilepage.dart';
-import 'package:flutter_apptest/profile.dart';
+import 'package:flutter_apptest/constants/size.dart';
+import 'package:flutter_apptest/profilepage.dart';
 import 'package:flutter_apptest/viewpage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:jiffy/jiffy.dart';
 import 'dart:ui';
 
 
@@ -23,17 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: {
-          '/' : (BuildContext context) => MyHomePage(),
-          '/add' : (BuildContext context) => AddPage(),
-
-        },
-      initialRoute: '/',
+      home: MyHomePage()
      );
   }
 }
@@ -80,6 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if(size == null){
+      size = MediaQuery.of(context).size;
+    }
     loadData();
     return Scaffold(
 
@@ -89,10 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               color: Colors.cyanAccent,
               child: MainPage(),
-            ),
-            Container(
-              color: Colors.cyanAccent,
-              child: AddPage(),
             ),
             Container(
               color: Colors.amberAccent,
@@ -119,7 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('글목록')),
-          BottomNavigationBarItem(icon: Icon(Icons.create),title: Text('글쓰기')),
           BottomNavigationBarItem(icon: Icon(Icons.create_new_folder ),title: Text('게시판')),
           BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('프로필', )),
 
@@ -149,6 +142,15 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text("게시판 글 목록"),
         centerTitle: true,
+        actions: [
+      IconButton(
+      icon: Icon(Icons.add_circle, size: 35,),
+      color: Colors.amber,
+      onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder:  (context) => AddPage()));
+      },
+      )
+        ],
       ),
       body: FutureBuilder<QuerySnapshot>(
           future: FirebaseFirestore.instance.collection("board").orderBy('time', descending: true).get(),
