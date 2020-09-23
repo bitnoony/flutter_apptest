@@ -85,7 +85,7 @@ class _BoardPageState extends State<BoardPage> {
                 ),
                 Spacer(),
                 IconButton(
-                  icon: Icon(Icons.check_circle,
+                  icon: Icon(Icons.favorite,
                     color: Colors.redAccent,
                   ),
                 ),

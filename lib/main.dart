@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/addpage.dart';
 import 'package:flutter_apptest/boardPage.dart';
+import 'package:flutter_apptest/parofilepage.dart';
 import 'package:flutter_apptest/profile.dart';
 import 'package:flutter_apptest/viewpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               color: Colors.greenAccent,
-              child: Profile(),
+              child: ProfilePage(),
             ),
           ],
           onPageChanged: (index){
