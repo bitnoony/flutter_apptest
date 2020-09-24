@@ -37,6 +37,27 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
 
     menuWidth = size.width / 1.5;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("프로필"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.menu_close,
+              color: Colors.amber,
+              size: 35,
+              progress: _animationController,
+              semanticLabel: 'Show menu',
+            ),
+            onPressed: () {
+              _menuOpened ? _animationController.reverse() : _animationController.forward();
+              setState(() {
+                _menuOpened = !_menuOpened;
+              });
+            },
+          )
+        ],
+      ),
       backgroundColor: Colors.grey[200],
       body: Stack(
         children: <Widget>[
@@ -80,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       child: SafeArea(
         child: Column(
           children: <Widget>[
-            _usernameIconButton(),
+           // _usernameIconButton(),
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -230,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     ),
   );
 
-  Row _usernameIconButton() {
+/*  Row _usernameIconButton() {
     return Row(
       children: <Widget>[
         Expanded(
@@ -256,7 +277,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
         )
       ],
     );
-  }
+  }*/
 
 
   Widget get _getTabIconButtons => Row(

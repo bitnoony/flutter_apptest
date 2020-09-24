@@ -1,9 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_apptest/camerapage.dart';
 import 'package:flutter_apptest/constants/size.dart';
 import 'package:flutter_apptest/utils/profile_img_path.dart';
 import 'package:flutter_apptest/widgets/comment.dart';
 import 'package:flutter_apptest/widgets/my_progress_indicator.dart';
+import 'package:provider/provider.dart';
+
 
 class BoardPage extends StatelessWidget {
   @override
@@ -18,7 +22,7 @@ class BoardPage extends StatelessWidget {
             icon: Icon(Icons.add_circle, size: 35,),
             color: Colors.amber,
             onPressed: (){
-
+              openCamera(context);
             },
           )
         ],
@@ -29,6 +33,17 @@ class BoardPage extends StatelessWidget {
             return _postItem(index, context);
           }),
     );
+  }
+
+  openCamera(BuildContext context) async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+
+    Navigator.push(context,
+        MaterialPageRoute(     // documentData.data["title"]
+            builder: (context)=> CameraPage(camera: firstCamera,
+            //user: Provider.of<MyUserData>(context).data,
+            )));
   }
 
   Column _postItem(int index, BuildContext context) {
