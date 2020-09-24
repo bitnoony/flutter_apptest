@@ -39,6 +39,7 @@ dependencies:
   flutter_tags:
   firebase_storage:
   image:
+  firebase_auth:
 
 
 dev_dependencies:

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>647371217539-rjo2uv041nf2i8h7hmgrrr50609mj3gd.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.647371217539-rjo2uv041nf2i8h7hmgrrr50609mj3gd</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCb1Aajymb9xwDpDBVh2Yv-CDSbbUu4m6Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>647371217539</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterApptest</string>
+	<key>PROJECT_ID</key>
+	<string>football-222314</string>
+	<key>STORAGE_BUCKET</key>
+	<string>football-222314.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:647371217539:ios:7ed9297703ce4b7335d9b6</string>
+	<key>DATABASE_URL</key>
+	<string>https://football-222314.firebaseio.com</string>
+</dict>
+</plist>

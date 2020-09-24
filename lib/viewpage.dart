@@ -17,16 +17,9 @@ class ViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Transform.scale(
-            scale: 1.5,
-            child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.amber),
-                onPressed: () {
-                  Navigator.pop(context);
-                }
-            )
-        ),
-        title: Text("글 내용 보기"), centerTitle: true,),
+        title: Text("공지사항 보기"),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

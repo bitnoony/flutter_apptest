@@ -31,7 +31,7 @@ class _AddPageState extends State<AddPage> {
                 }
             )
         ),
-        title: Text("새 글 쓰기"), centerTitle: true,),
+        title: Text("공지하기"), centerTitle: true,),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

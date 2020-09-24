@@ -17,7 +17,6 @@ Future<void> main() async {
 }
 
 
-
 class MyApp extends StatelessWidget {
 
   @override
@@ -28,9 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-
       ),
-      home: MyHomePage(),
+      home: MyHomePage()
      );
   }
 }
@@ -114,8 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onTap,
         currentIndex: _selectedIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('글목록')),
-          BottomNavigationBarItem(icon: Icon(Icons.create_new_folder ),title: Text('게시판')),
+          BottomNavigationBarItem(icon: Icon(Icons.folder_open),title: Text('공지사항')),
+          BottomNavigationBarItem(icon: Icon(Icons.create_new_folder ),title: Text('커뮤니티')),
           BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('프로필', )),
 
         ],
@@ -142,7 +140,7 @@ class _MainPageState extends State<MainPage> {
 
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text("게시판 글 목록"),
+        title: Text("공지사항"),
         centerTitle: true,
         actions: [
       IconButton(

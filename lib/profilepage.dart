@@ -43,9 +43,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
         actions: [
           IconButton(
             icon: AnimatedIcon(
-              icon: AnimatedIcons.menu_close,
               color: Colors.amber,
               size: 35,
+              icon: AnimatedIcons.menu_close,
               progress: _animationController,
               semanticLabel: 'Show menu',
             ),
@@ -101,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       child: SafeArea(
         child: Column(
           children: <Widget>[
-           // _usernameIconButton(),
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -251,33 +250,6 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     ),
   );
 
-/*  Row _usernameIconButton() {
-    return Row(
-      children: <Widget>[
-        Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: common_gap),
-              child: Text(
-                '송빛누니',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-            )),
-        IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.menu_close,
-            progress: _animationController,
-            semanticLabel: 'Show menu',
-          ),
-          onPressed: () {
-            _menuOpened ? _animationController.reverse() : _animationController.forward();
-            setState(() {
-              _menuOpened = !_menuOpened;
-            });
-          },
-        )
-      ],
-    );
-  }*/
 
 
   Widget get _getTabIconButtons => Row(
