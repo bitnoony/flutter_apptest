@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apptest/constants/size.dart';
-import 'package:flutter_apptest/share_post_page.dart';
+import 'package:flutter_apptest/widgets/share_post_page.dart';
 import 'package:flutter_apptest/widgets/my_progress_indicator.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -166,6 +166,7 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   void _attemptTakePhoto(BuildContext context) async {
+    final String postKey = '${DateTime.now().millisecondsSinceEpoch}';
 
     try {
       await _initializeControllerFuture;
@@ -181,6 +182,7 @@ class _CameraPageState extends State<CameraPage> {
         MaterialPageRoute(
           builder: (context) => SharePostPage(
             imgFile: File(path),
+            postKey: postKey,
           )
         )
       );

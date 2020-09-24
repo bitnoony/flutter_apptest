@@ -28,8 +28,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+
       ),
-      home: MyHomePage()
+      home: MyHomePage(),
      );
   }
 }
